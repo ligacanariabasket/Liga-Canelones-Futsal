@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'ligacanelonesfutsalmc.netlify.app',
+        hostname: 'https://liga-canelones-futsal.netlify.app/',
         port: '',
         pathname: '/**',
       },

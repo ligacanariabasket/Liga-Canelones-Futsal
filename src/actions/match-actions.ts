@@ -485,24 +485,42 @@ export async function getLatestChronicles(limit: number = 5): Promise<(MatchChro
 }
     
 
-export async function getFinishedMatchesForHomepage(limit: number = 6) {
-  return prisma.match.findMany({
-    where: { status: 'FINISHED' },
-    take: limit,
-    orderBy: {
-      scheduledTime: 'desc',
-    },
-    include: {
-      teamA: true,
-      teamB: true,
-      _count: {
-        select: {
-          chronicles: true,
+export async function getFinishedMatchesForHomepage() {
+    const latestFinishedMatch = await prisma.match.findFirst({
+      where: { status: 'FINISHED' },
+      orderBy: {
+        scheduledTime: 'desc',
+      },
+      select: {
+        round: true,
+      },
+    });
+  
+    if (!latestFinishedMatch || latestFinishedMatch.round === null) {
+      return [];
+    }
+  
+    const lastPlayedRound = latestFinishedMatch.round;
+  
+    return prisma.match.findMany({
+      where: {
+        status: 'FINISHED',
+        round: lastPlayedRound,
+      },
+      orderBy: {
+        scheduledTime: 'asc',
+      },
+      include: {
+        teamA: true,
+        teamB: true,
+        _count: {
+          select: {
+            chronicles: true,
+          },
         },
       },
-    },
-  });
-}
+    });
+  }
     
 
     
