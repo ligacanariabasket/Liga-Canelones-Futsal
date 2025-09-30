@@ -8,26 +8,41 @@ import { CardHeader, CardTitle } from '@/components/ui/card';
 import { MatchCard } from './MatchCard';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from '@/components/ui/pagination';
 import { Input } from '@/components/ui/input';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Button } from '@/components/ui/button';
 
 interface FinishedMatchesListProps {
     matches: FullMatch[];
 }
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 10;
 
 export function FinishedMatchesList({ matches }: FinishedMatchesListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedRound, setSelectedRound] = useState<number | 'all'>('all');
+
+    const rounds = useMemo(() => {
+        const roundSet = new Set(matches.map(m => m.round).filter((r): r is number => r !== null && r !== undefined));
+        return Array.from(roundSet).sort((a, b) => a - b);
+    }, [matches]);
 
     const filteredMatches = useMemo(() => {
-        if (!searchTerm) {
-            return matches;
+        let filtered = matches;
+
+        if (searchTerm) {
+            filtered = filtered.filter(match =>
+                match.teamA.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                match.teamB.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
         }
-        return matches.filter(match =>
-            match.teamA.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            match.teamB.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    }, [matches, searchTerm]);
+
+        if (selectedRound !== 'all') {
+            filtered = filtered.filter(match => match.round === selectedRound);
+        }
+        
+        return filtered;
+    }, [matches, searchTerm, selectedRound]);
 
     const totalPages = Math.ceil(filteredMatches.length / ITEMS_PER_PAGE);
 
@@ -43,10 +58,9 @@ export function FinishedMatchesList({ matches }: FinishedMatchesListProps) {
         }
     };
     
-    // Reset to page 1 when search term changes
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [searchTerm]);
+    }, [searchTerm, selectedRound]);
 
     const renderPagination = () => {
         if (totalPages <= 1) return null;
@@ -95,9 +109,9 @@ export function FinishedMatchesList({ matches }: FinishedMatchesListProps) {
 
     return (
         <div className="space-y-6">
-            <CardHeader className="p-0 mb-4 flex-row items-center justify-between">
+            <CardHeader className="p-0 mb-4 flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4">
                 <CardTitle>Selecciona un Partido Finalizado</CardTitle>
-                <div className="w-full max-w-sm">
+                <div className="w-full sm:w-auto sm:max-w-xs">
                     <Input
                         placeholder="Buscar por equipo..."
                         value={searchTerm}
@@ -105,6 +119,39 @@ export function FinishedMatchesList({ matches }: FinishedMatchesListProps) {
                     />
                 </div>
             </CardHeader>
+            
+            {rounds.length > 0 && (
+                 <Carousel
+                    opts={{ align: "start", containScroll: "trimSnaps" }}
+                    className="w-full max-w-lg mx-auto"
+                >
+                    <CarouselContent className="-ml-2">
+                         <CarouselItem className="pl-2 basis-auto">
+                            <Button
+                                variant={selectedRound === 'all' ? 'default' : 'outline'}
+                                onClick={() => setSelectedRound('all')}
+                                size="sm"
+                            >
+                                Todas las Jornadas
+                            </Button>
+                        </CarouselItem>
+                        {rounds.map(round => (
+                            <CarouselItem key={round} className="pl-2 basis-auto">
+                            <Button
+                                variant={selectedRound === round ? 'default' : 'outline'}
+                                onClick={() => setSelectedRound(round)}
+                                className="w-full"
+                                size="sm"
+                            >
+                                Jornada {round}
+                            </Button>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden sm:flex" />
+                    <CarouselNext className="hidden sm:flex" />
+              </Carousel>
+            )}
 
             {currentMatches.length > 0 ? (
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
