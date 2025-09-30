@@ -6,7 +6,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 1,
     name: "LOS QUITU",
-    logoUrl: "/equipos/1.png",
+    logoUrl: "/optimas/equipos/1.webp",
     slug: "losquitu",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -20,7 +20,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 10,
     name: "LA PAPA MADRE",
-    logoUrl: "/equipos/10.png",
+    logoUrl: "/optimas/equipos/10.webp",
     slug: "lpm",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -34,7 +34,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 11,
     name: "WANDERERS",
-    logoUrl: "/equipos/11.png",
+    logoUrl: "/optimas/equipos/11.webp",
     slug: "wanderers",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -48,7 +48,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 12,
     name: "JCC 1930",
-    logoUrl: "/equipos/12.png",
+    logoUrl: "/optimas/equipos/12.webp",
     slug: "jcc-1930",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -62,7 +62,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 13,
     name: "STELLA",
-    logoUrl: '/equipos/13.png',
+    logoUrl: '/optimas/equipos/13.webp',
     slug: "stella",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -76,7 +76,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 14,
     name: "REAL CANELONES",
-    logoUrl: "/equipos/14.png",
+    logoUrl: "/optimas/equipos/14.webp",
     slug: "realcanelones",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -90,7 +90,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 15,
     name: "DAC",
-    logoUrl: "/equipos/15.png",
+    logoUrl: "/optimas/equipos/15.webp",
     slug: "dac",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -104,7 +104,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 2,
     name: "VALDEARCOS",
-    logoUrl: "/equipos/2.png",
+    logoUrl: "/optimas/equipos/2.webp",
     slug: "valdearcos",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -118,7 +118,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 3,
     name: "NEGRIAZUL",
-    logoUrl: "/equipos/3.png",
+    logoUrl: "/optimas/equipos/3.webp",
     slug: "negriazul",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -132,7 +132,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 4,
     name: "PEDRENSE",
-    logoUrl: "/equipos/4.png",
+    logoUrl: "/optimas/equipos/4.webp",
     slug: "pedrense",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -146,7 +146,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 5,
     name: "LA PIECITA",
-    logoUrl: "/equipos/5.png",
+    logoUrl: "/optimas/equipos/5.webp",
     slug: "lapiecita",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -160,7 +160,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 6,
     name: "EL HACHA",
-    logoUrl: "/equipos/6.png",
+    logoUrl: "/optimas/equipos/6.webp",
     slug: "elhacha",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -174,7 +174,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 7,
     name: "MILANO",
-    logoUrl: "/equipos/7.png",
+    logoUrl: "/optimas/equipos/7.webp",
     slug: "milano",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -188,7 +188,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 8,
     name: "T. DE CAMPEONES",
-    logoUrl: "/equipos/8.png",
+    logoUrl: "/optimas/equipos/8.webp",
     slug: "tierra",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
@@ -202,7 +202,7 @@ const baseTeams: Omit<Team, 'players'>[] = [
   {
     id: 9,
     name: "CAPINCHO",
-    logoUrl: '/equipos/9.png',
+    logoUrl: '/optimas/equipos/9.webp',
     slug: "capincho",
     createdAt: new Date("2025-09-06T02:11:09.842Z"),
     updatedAt: new Date("2025-09-06T02:11:09.842Z"),
