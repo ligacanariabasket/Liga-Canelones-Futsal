@@ -5,11 +5,10 @@ import { TeamHeader } from '@/components/clubes/TeamHeader';
 import { TeamTabs } from '@/components/clubes/TeamTabs';
 import type { Team } from '@/types';
 
-interface ClubPageProps {
-    params: {
-        slug: string;
-    };
-}
+type ClubPageProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export default async function ClubPage({ params }: ClubPageProps) {
     const { slug } = params;

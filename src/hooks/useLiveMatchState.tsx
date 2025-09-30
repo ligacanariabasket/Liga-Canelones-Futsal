@@ -37,7 +37,7 @@ export function useLiveMatchState(matchId: number | null, initialMatchData: Full
     try {
       if (typeof window !== 'undefined' && matchId) {
         const savedStateJSON = localStorage.getItem(`futsal-match-state-${matchId}`);
-        if (savedStateJSON) {
+        if (savedStateJSON && savedStateJSON.trim() !== '') { // Check for non-empty string
             localState = JSON.parse(savedStateJSON) as GameState;
         }
       }
