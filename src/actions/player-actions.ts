@@ -59,7 +59,7 @@ export async function createPlayer(values: z.infer<typeof playerSchema>) {
         select: { slug: true }
       });
       if (team) {
-        finalAvatarUrl = `/equipos/jugadores_individuales/avatar_${team.slug}.png`;
+        finalAvatarUrl = `/optimas/equipos/jugadores_individuales/avatar_${team.slug}.webp`;
       }
     }
 
@@ -73,12 +73,9 @@ export async function createPlayer(values: z.infer<typeof playerSchema>) {
         weight,
         team: {
             connect: { id: teamId }
-        }
+        },
+        avatarUrl: finalAvatarUrl,
     };
-
-    if (finalAvatarUrl) {
-        playerData.avatarUrl = finalAvatarUrl;
-    }
 
     await prisma.player.create({
         data: playerData,
@@ -118,7 +115,7 @@ export async function updatePlayer(id: number, values: z.infer<typeof playerSche
             birthDate: birthDate || undefined,
             height: height || undefined,
             weight: weight || undefined,
-        }
+        },
     });
 
     revalidatePath('/gestion/jugadores');

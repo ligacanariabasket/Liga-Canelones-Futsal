@@ -63,7 +63,7 @@ export function TacticalBoard({ match }: { match: FullMatch }) {
     <div
     ref={dropRef}
     className="relative w-full h-full max-w-4xl bg-contain bg-center bg-no-repeat overflow-hidden"
-    style={{ backgroundImage: "url('/cancha-futbol.png')" }}
+    style={{ backgroundImage: "url('/optimas/cancha-futbol.webp')" }}
     >
         <div className="absolute inset-0 flex">
             <div className="w-1/2 h-full bg-blue-500/10"></div>
