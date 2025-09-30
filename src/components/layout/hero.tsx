@@ -34,7 +34,7 @@ export default function Hero() {
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
                 style={
                     {
-                        backgroundImage: `url('https://1000marcas.net/wp-content/uploads/2025/04/fondo-de-pantalla-azul-para-el-fondo.png')`
+                        backgroundImage: `url('/banners/banner_azul.png')`
                     }
                 }
                 data-ai-hint="futsal court">
