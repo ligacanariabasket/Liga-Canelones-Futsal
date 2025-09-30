@@ -63,20 +63,22 @@ export async function createPlayer(values: z.infer<typeof playerSchema>) {
       }
     }
 
-    await prisma.player.create({
-        data: {
-            name,
-            number,
-            position,
-            team: {
-                connect: { id: teamId }
-            },
-            avatarUrl: finalAvatarUrl,
-            nationality: nationality || 'URU',
-            birthDate,
-            height,
-            weight,
+    const playerData: Prisma.PlayerCreateInput = {
+        name,
+        number,
+        position,
+        team: {
+            connect: { id: teamId }
         },
+        nationality: nationality || 'URU',
+        birthDate,
+        height,
+        weight,
+        ...(finalAvatarUrl && { avatarUrl: finalAvatarUrl }),
+    };
+
+    await prisma.player.create({
+        data: playerData,
     });
 
     revalidatePath('/gestion/jugadores');
@@ -101,19 +103,23 @@ export async function updatePlayer(id: number, values: z.infer<typeof playerSche
         throw new Error("El jugador no existe.");
     }
     
+    const playerData: Prisma.PlayerUpdateInput = {
+        name,
+        number,
+        position,
+        team: {
+            connect: { id: teamId }
+        },
+        nationality: nationality || undefined,
+        birthDate: birthDate || undefined,
+        height: height || undefined,
+        weight: weight || undefined,
+        ...(avatarUrl && { avatarUrl: avatarUrl }),
+    };
+    
     await prisma.player.update({
         where: { id },
-        data: {
-            name,
-            number,
-            position,
-            teamId,
-            avatarUrl: avatarUrl || undefined,
-            nationality: nationality || undefined,
-            birthDate: birthDate || undefined,
-            height: height || undefined,
-            weight: weight || undefined,
-        },
+        data: playerData,
     });
 
     revalidatePath('/gestion/jugadores');
