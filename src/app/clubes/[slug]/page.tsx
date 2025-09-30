@@ -1,15 +1,21 @@
-
 import { getTeamBySlug } from '@/actions/team-actions';
 import { notFound } from 'next/navigation';
 import { TeamHeader } from '@/components/clubes/TeamHeader';
 import { TeamTabs } from '@/components/clubes/TeamTabs';
 import type { Team } from '@/types';
 
-type ClubPageProps = {
-  params: { slug: string };
-};
+// El tipo 'ClubPageProps' ya no es necesario, puedes eliminarlo.
+// type ClubPageProps = {
+//   params: { slug: string };
+//   searchParams: { [key: string]: string | string[] | undefined };
+// };
 
-export default async function ClubPage({ params }: ClubPageProps) {
+// Tipamos las props directamente en la firma de la función.
+export default async function ClubPage({
+    params,
+}: {
+    params: { slug: string };
+}) {
     const { slug } = params;
     const team = await getTeamBySlug(slug);
 
