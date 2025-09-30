@@ -63,22 +63,20 @@ export async function createPlayer(values: z.infer<typeof playerSchema>) {
       }
     }
 
-    const playerData: Prisma.PlayerCreateInput = {
-        name,
-        number,
-        position,
-        nationality: nationality || 'URU',
-        birthDate,
-        height,
-        weight,
-        team: {
-            connect: { id: teamId }
-        },
-        avatarUrl: finalAvatarUrl,
-    };
-
     await prisma.player.create({
-        data: playerData,
+        data: {
+            name,
+            number,
+            position,
+            team: {
+                connect: { id: teamId }
+            },
+            avatarUrl: finalAvatarUrl,
+            nationality: nationality || 'URU',
+            birthDate,
+            height,
+            weight,
+        },
     });
 
     revalidatePath('/gestion/jugadores');

@@ -95,23 +95,26 @@ export const getStandingsFromMatches = cache(async (seasonId: number): Promise<S
 
             if (!teamAStats || !teamBStats) continue;
 
+            const goalsA = scoreA ?? 0;
+            const goalsB = scoreB ?? 0;
+
             teamAStats.played += 1;
             teamBStats.played += 1;
-            teamAStats.goalsFor += scoreA ?? 0;
-            teamBStats.goalsFor += scoreB ?? 0;
-            teamAStats.goalsAgainst += scoreB ?? 0;
-            teamBStats.goalsAgainst += scoreA ?? 0;
+            teamAStats.goalsFor += goalsA;
+            teamBStats.goalsFor += goalsB;
+            teamAStats.goalsAgainst += goalsB;
+            teamBStats.goalsAgainst += goalsA;
 
             let resultA: 'W' | 'D' | 'L' = 'D';
             let resultB: 'W' | 'D' | 'L' = 'D';
 
-            if (scoreA > scoreB) {
+            if (goalsA > goalsB) {
                 teamAStats.wins += 1;
                 teamAStats.points += 2;
                 teamBStats.losses += 1;
                 resultA = 'W';
                 resultB = 'L';
-            } else if (scoreB > scoreA) {
+            } else if (goalsB > goalsA) {
                 teamBStats.wins += 1;
                 teamBStats.points += 2;
                 teamAStats.losses += 1;
