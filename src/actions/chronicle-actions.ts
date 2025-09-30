@@ -91,7 +91,14 @@ export async function generateAndSaveChronicleAction(input: z.infer<typeof Gener
 
     } catch (error) {
         console.error(`Error en generateAndSaveChronicleAction para el partido ${matchId}:`, error);
-        const errorMessage = error instanceof Error ? error.message : "Error desconocido al generar la crónica.";
+        let errorMessage = "Error desconocido al generar la crónica.";
+        if (error instanceof Error) {
+            if (error.message.includes('503') || error.message.toLowerCase().includes('overloaded')) {
+                errorMessage = "El servicio de IA está sobrecargado en este momento. Por favor, inténtalo de nuevo más tarde.";
+            } else {
+                errorMessage = error.message;
+            }
+        }
         return { success: false, error: errorMessage };
     }
 }
