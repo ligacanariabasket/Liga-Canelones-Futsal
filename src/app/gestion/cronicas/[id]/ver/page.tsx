@@ -9,11 +9,12 @@ import type { MatchChronicle } from '@/types';
 import type { GenerateMatchChronicleOutput } from '@/types/genkit-types';
 
 interface ViewChroniclePageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function ViewChroniclePage({ params }: ViewChroniclePageProps) {
-  const id = parseInt(params.id, 10);
+  const resolvedParams = await params;
+  const id = parseInt(resolvedParams.id, 10);
   if (isNaN(id)) {
     notFound();
   }
