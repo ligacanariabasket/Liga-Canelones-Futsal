@@ -1,0 +1,51 @@
+
+export const sampleVideos = [
+  {
+    id: 1,
+    title: 'Resumen de la Jornada 5: Goles y Polémicas',
+    thumbnailUrl: 'https://picsum.photos/seed/v1/600/400',
+    duration: '05:32',
+    category: 'Resúmenes',
+    url: '#',
+  },
+  {
+    id: 2,
+    title: 'Análisis Táctico: La defensa de Los Quitu',
+    thumbnailUrl: 'https://picsum.photos/seed/v2/600/400',
+    duration: '12:15',
+    category: 'Análisis',
+    url: '#',
+  },
+  {
+    id: 3,
+    title: 'Entrevista Exclusiva con el DT de La Papa Madre',
+    thumbnailUrl: 'https://picsum.photos/seed/v3/600/400',
+    duration: '08:45',
+    category: 'Entrevistas',
+    url: '#',
+  },
+  {
+    id: 4,
+    title: 'Top 5 Goles de la Semana',
+    thumbnailUrl: 'https://picsum.photos/seed/v4/600/400',
+    duration: '03:10',
+    category: 'Highlights',
+    url: '#',
+  },
+  {
+    id: 5,
+    title: 'La historia de superación de un jugador de Wanderers',
+    thumbnailUrl: 'https://picsum.photos/seed/v5/600/400',
+    duration: '07:50',
+    category: 'Historias',
+    url: '#',
+  },
+   {
+    id: 6,
+    title: 'Previa del Clásico: El Hacha vs. Valdearcos',
+    thumbnailUrl: 'https://picsum.photos/seed/v6/600/400',
+    duration: '04:22',
+    category: 'Previas',
+    url: '#',
+  },
+];

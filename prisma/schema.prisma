@@ -1,0 +1,239 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_DIRECT")
+}
+
+model Team {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique
+  slug        String           @unique
+  logoUrl     String?
+  description String?          @db.Text
+  bannerUrl   String?
+  instagram   String?
+  facebook    String?
+  whatsapp    String?
+  phone       String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  players     Player[]
+  matchesA    Match[]          @relation("TeamAMatches")
+  matchesB    Match[]          @relation("TeamBMatches")
+  seasonTeams SeasonTeam[]
+  gameEvents  GameEvent[]
+  chronicles  MatchChronicle[]
+}
+
+model Player {
+  id          Int                @id @default(autoincrement())
+  name        String
+  number      Int
+  position    PlayerPosition
+  birthDate   DateTime?
+  height      Int?
+  weight      Int?
+  nationality String?
+  teamId      Int
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  team        Team               @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  stats       PlayerMatchStats[]
+  gameEvents  GameEvent[]
+  pollOptions PollOption[]
+  polls       Poll[]
+}
+
+model Season {
+  id        Int          @id @default(autoincrement())
+  name      String
+  year      Int
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  teams     SeasonTeam[]
+  matches   Match[]
+}
+
+model SeasonTeam {
+  seasonId       Int
+  teamId         Int
+  position       Int    @default(0)
+  points         Int    @default(0)
+  played         Int    @default(0)
+  wins           Int    @default(0)
+  draws          Int    @default(0)
+  losses         Int    @default(0)
+  goalsFor       Int    @default(0)
+  goalsAgainst   Int    @default(0)
+  goalDifference Int    @default(0)
+  season         Season @relation(fields: [seasonId], references: [id])
+  team           Team   @relation(fields: [teamId], references: [id])
+
+  @@id([seasonId, teamId])
+}
+
+model Match {
+  id               Int                @id @default(autoincrement())
+  teamAId          Int
+  teamBId          Int
+  scheduledTime    DateTime
+  status           MatchStatus        @default(SCHEDULED)
+  scoreA           Int?
+  scoreB           Int?
+  period           Int?
+  time             Int?
+  foulsA           Int?
+  foulsB           Int?
+  timeoutsA        Int?
+  timeoutsB        Int?
+  isRunning        Boolean?
+  activePlayersA   Int[]              @default([])
+  activePlayersB   Int[]              @default([])
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  teamA            Team               @relation("TeamAMatches", fields: [teamAId], references: [id])
+  teamB            Team               @relation("TeamBMatches", fields: [teamBId], references: [id])
+  events           GameEvent[]
+  playerMatchStats PlayerMatchStats[]
+  round            Int?
+  seasonId         Int?
+  season           Season?            @relation(fields: [seasonId], references: [id])
+  chronicles       MatchChronicle[]
+  polls            Poll[]
+}
+
+model PlayerMatchStats {
+  matchId             Int
+  playerId            Int
+  timePlayedInSeconds Int    @default(0)
+  match               Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  player              Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@id([matchId, playerId])
+}
+
+model GameEvent {
+  id           Int       @id @default(autoincrement())
+  matchId      Int
+  type         EventType
+  timestamp    Int
+  teamId       Int
+  playerId     Int?
+  playerName   String?
+  teamName     String?
+  playerInId   Int?
+  playerInName String?
+  x            Int?
+  y            Int?
+  match        Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team         Team      @relation(fields: [teamId], references: [id])
+  player       Player?   @relation(fields: [playerId], references: [id])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String   @db.Text
+  imageUrl  String
+  imageBlob Bytes?
+  content   String
+  category  String
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MatchChronicle {
+  id        Int      @id @default(autoincrement())
+  matchId   Int
+  teamId    Int
+  chronicle Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  match     Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([matchId, teamId])
+}
+
+enum PlayerPosition {
+  GOLERO
+  DEFENSA
+  ALA
+  PIVOT
+}
+
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  FINISHED
+  SELECTING_STARTERS
+  POSTPONED
+  IN_PROGRESS
+}
+
+enum EventType {
+  GOAL
+  ASSIST
+  FOUL
+  SHOT
+  YELLOW_CARD
+  RED_CARD
+  TIMEOUT
+  SUBSTITUTION
+  MATCH_START
+  PERIOD_START
+  MATCH_END
+}
+
+model Poll {
+  id          Int        @id @default(autoincrement())
+  question    String
+  type        PollType
+  createdAt   DateTime   @default(now())
+  expiresAt   DateTime?
+  matchId     Int?
+  match       Match?     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  playerId    Int?
+  player      Player?    @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  options     PollOption[]
+  votes       Vote[]
+}
+
+model PollOption {
+  id       Int     @id @default(autoincrement())
+  text     String
+  pollId   Int
+  poll     Poll    @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  playerId Int?
+  player   Player? @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  votes    Vote[]
+}
+
+model Vote {
+  id           Int        @id @default(autoincrement())
+  pollId       Int
+  poll         Poll       @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  pollOptionId Int
+  pollOption   PollOption @relation(fields: [pollOptionId], references: [id], onDelete: Cascade)
+  userId       String
+  createdAt    DateTime   @default(now())
+
+  @@unique([pollId, userId])
+}
+
+enum PollType {
+  PLAYER_OF_THE_MATCH
+  PLAYER_OF_THE_WEEK
+  BEST_GOAL
+  MATCH_PREDICTION
+  OTHER
+}

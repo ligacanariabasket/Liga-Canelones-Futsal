@@ -1,0 +1,88 @@
+{
+  "name": "Liga Canaria de Futsal",
+  "short_name": "Liga Futsal",
+  "description": "Clasificación, calendario y resultados de la Liga Canaria de Futsal.",
+  "lang": "es-UY",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#282F63",
+  "theme_color": "#282F63",
+  "categories": [
+    "sports"
+  ],
+  "icons": [
+    {
+      "src": "/favicon/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Partidos",
+      "short_name": "Partidos",
+      "description": "Calendario de próximos partidos",
+      "url": "/partidos",
+      "icons": [
+        {
+          "src": "/favicon/web-app-manifest-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Tabla de Posiciones",
+      "short_name": "Posiciones",
+      "description": "Clasificación actual de la liga",
+      "url": "/posiciones",
+      "icons": [
+        {
+          "src": "/favicon/web-app-manifest-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Ver Clubes",
+      "short_name": "Clubes",
+      "description": "Explora los equipos de la liga",
+      "url": "/clubes",
+      "icons": [
+        {
+          "src": "/favicon/web-app-manifest-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

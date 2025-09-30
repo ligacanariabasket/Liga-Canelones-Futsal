@@ -1,0 +1,80 @@
+# Archivos y directorios generados y de dependencias
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Archivos de bloqueo de paquetes
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Variables de entorno
+.env
+.env.local
+.env.development
+.env.production
+
+# Registros y depuración
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Directorios de IDE
+.vscode/
+.idea/
+
+# Archivos de Git
+.git/
+.gitignore
+
+# Respaldos de Prisma
+prisma/respaldo/
+prisma/json-exports/
+src/data/cronicas.txt
+src/data/estructura.json
+src/data/estructura.txt
+src/data/public.json
+src/data/estructura.json
+estructura.json
+prisma/json-exports/gameEvent.json
+prisma/json-exports/match.json
+prisma/json-exports/matchChronicle.json
+prisma/json-exports/player.json
+prisma/json-exports/playerMatchStats.json
+prisma/json-exports/poll.json
+prisma/json-exports/pollOption.json
+prisma/json-exports/post.json
+prisma/json-exports/season.json
+prisma/json-exports/seasonTeam.json
+prisma/json-exports/team.json
+prisma/json-exports/vote.json
+prisma/respaldo/gameEvent.json
+prisma/respaldo/match.json
+prisma/respaldo/matchChronicle.json
+prisma/respaldo/player.json
+prisma/respaldo/playerMatchStats.json
+prisma/respaldo/poll.json
+prisma/respaldo/pollOption.json
+prisma/respaldo/post.json
+prisma/respaldo/season.json
+prisma/respaldo/seasonTeam.json
+prisma/respaldo/team.json
+prisma/respaldo/vote.json
+src/data/cronicas.txt
+src/data/estructura.json
+src/data/estructura.txt
+src/data/public.json
+
+# Activos estáticos públicos (generalmente no es necesario que la IA los vea)
+public/
+
+# Archivos de configuración específicos de la IA o de documentación
+GEMINI.md
+
