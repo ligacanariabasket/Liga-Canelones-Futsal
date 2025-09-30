@@ -7,7 +7,6 @@ import type { Team } from '@/types';
 
 type ClubPageProps = {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default async function ClubPage({ params }: ClubPageProps) {
