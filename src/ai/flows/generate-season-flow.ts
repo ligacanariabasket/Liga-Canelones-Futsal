@@ -8,7 +8,7 @@
  */
 
 import { ai } from '@/ai/genkit';
-import prisma from '../../lib/prisma';
+import { prisma } from '../../lib/prisma';
 import { generateFixture } from '@/actions/match-actions';
 import { z } from 'zod';
 import type { CreateSeasonAndTeamsInput, GenerateFixtureForSeasonInput } from '@/types/genkit-types';

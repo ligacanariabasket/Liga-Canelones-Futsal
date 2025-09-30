@@ -1,7 +1,8 @@
+
 'use server';
 
 import { cache } from 'react';
-import prisma from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 import type { FullMatch, GameEventType, Team } from '@/types';
 import { Prisma, type GameEvent } from '@prisma/client';
 

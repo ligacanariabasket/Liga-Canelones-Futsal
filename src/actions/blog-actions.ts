@@ -1,7 +1,8 @@
+
 'use server';
 
 import { cache } from 'react';
-import prisma from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 import type { Post } from '@/types';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';

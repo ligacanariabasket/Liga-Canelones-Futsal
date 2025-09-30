@@ -2,7 +2,7 @@
 'use server';
 
 import { cache } from 'react';
-import prisma from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 import type { Season, Team } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import type { SeasonTeam } from '@/types';

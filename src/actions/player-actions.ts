@@ -2,7 +2,7 @@
 'use server';
 
 import { cache } from 'react';
-import prisma from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 import type { Player, Team, PlayerStat, PlayerWithStats, GameEvent } from '@/types';
 import { getAllMatches, getMatchStats } from './match-actions';
 import type { Prisma } from '@prisma/client';
