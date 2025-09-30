@@ -110,9 +110,9 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                     throw new Error("El JSON debe ser un array o un objeto con una propiedad 'matches' que sea un array.");
                 }
 
-                const newRound = matchups.reduce((acc: Matchup[], match: any) => {
-                    const teamAId = match.local?.id || match.teamAId;
-                    const teamBId = match.visitor?.id || match.teamBId;
+                 const newRound = matchups.reduce((acc: Matchup[], match: any) => {
+                    const teamAId = match.local?.id ?? match.teamAId;
+                    const teamBId = match.visitor?.id ?? match.teamBId;
 
                     if (!teamAId || !teamBId) {
                         console.warn("Skipping invalid matchup:", match);
@@ -239,7 +239,7 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                                         <Calendar 
                                             mode="single"
                                             selected={match.scheduledDate || undefined}
-                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date)}
+                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date || null)}
                                         />
                                     </PopoverContent>
                                 </Popover>
@@ -281,5 +281,7 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
         </Card>
     );
 }
+
+    
 
     
