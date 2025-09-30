@@ -63,7 +63,7 @@ const prompt = ai.definePrompt({
         - Create a concise summary of the most important statistics in Markdown list format.
         - Include 2 to 4 key statistics that tell the story of the match (e.g., top scorer, most influential player, key tactical observation).
         - After the list, add a separator '---' and then include a promotional line for the league, like "¡Sigue toda la emoción en Liga Canaria Futsal!".
-        - The summary MUST end with the league banner image on a new line: \`![Banner de la Liga](/banner_youtube.jpg)\`.
+        - The summary MUST end with the league banner image on a new line: \`![Banner de la Liga](/optimas/banner_youtube.webp)\`.
         
         ### 3. Title (title)
         - Create a simple, direct, and impactful title for the chronicle. Example: 'Victoria Agónica de [Winning Team] sobre [Losing Team]'.
@@ -87,5 +87,3 @@ const generateChronicleFlow = ai.defineFlow(
     return output;
   }
 );
-
-    

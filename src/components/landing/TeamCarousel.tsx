@@ -82,7 +82,7 @@ export function TeamCarousel({ teams, loading }: TeamCarouselProps) {
         <section id="teams" className="relative py-20 text-center overflow-hidden">
              <div className="absolute inset-0">
                 <Image
-                    src="/banners/banner_azul2.jpeg"
+                    src="/optimas/banners/banner_azul2.webp"
                     alt="Fondo de la sección de equipos"
                     fill
                     className="object-cover"

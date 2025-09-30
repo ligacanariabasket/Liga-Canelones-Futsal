@@ -21,7 +21,7 @@ export function PlayerHero({ player }: PlayerHeroProps) {
         <header className="relative bg-gray-900 overflow-hidden pt-12 pb-8">
              <div 
                 className="absolute inset-0 bg-cover bg-center opacity-30"
-                style={{ backgroundImage: `url('${player.team.bannerUrl || '/banner_youtube.jpg'}')` }}
+                style={{ backgroundImage: player.team.bannerUrl ? `url(/optimas${player.team.bannerUrl.replace(/\.(jpg|jpeg|png)$/, '.webp')})` : "none" }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
 

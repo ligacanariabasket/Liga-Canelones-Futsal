@@ -28,7 +28,7 @@ export function PlayerInfoCard({ player, team }: PlayerInfoCardProps) {
         <Card className="flex flex-col h-full overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-primary/20 bg-card relative isolate">
           <div 
             className="absolute inset-0 bg-cover bg-center opacity-10 z-0 transition-opacity group-hover:opacity-20"
-            style={{ backgroundImage: `url(${team.bannerUrl || '/banner_youtube.jpg'})` }}
+            style={{ backgroundImage: team.bannerUrl ? `url(/optimas${team.bannerUrl.replace(/\.(jpg|jpeg|png)$/, '.webp')})` : "none" }}
           ></div>
           <div className="absolute inset-0 bg-gradient-to-t from-card via-card/80 to-transparent z-10"></div>
           

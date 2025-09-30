@@ -11,7 +11,7 @@ export function HinchadaBanner() {
   return (
     <motion.section 
         className="relative py-20 bg-cover bg-center text-white" 
-        style={{ backgroundImage: "url('/stadium-bg.jpg')" }}
+        style={{ backgroundImage: "url('/optimas/stadium-bg.webp')" }}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}

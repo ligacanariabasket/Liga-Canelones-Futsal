@@ -15,7 +15,7 @@ export function LandingTwoColumn({ left, right }: LandingTwoColumnProps) {
         <section className="relative py-20 overflow-hidden">
             <div className="absolute inset-0">
                 <Image 
-                    src="/banners/banner_azul2.jpeg"
+                    src="/optimas/banners/banner_azul2.webp"
                     alt="Fondo de la sección"
                     fill
                     className="object-cover"

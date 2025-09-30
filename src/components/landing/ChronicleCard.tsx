@@ -48,7 +48,9 @@ export function ChronicleCard({ chronicle }: ChronicleCardProps) {
     parsedChronicle = chronicleData as GenerateMatchChronicleOutput;
   }
 
-  const imageSrc = match.teamA.bannerUrl || match.teamB.bannerUrl || '/banner_youtube.jpg';
+  const imageSrc = (match.teamA.bannerUrl || match.teamB.bannerUrl || '/banner_youtube.jpg').replace(/\.(jpg|jpeg|png)$/, '.webp');
+  const finalImageSrc = imageSrc.startsWith('/optimas') ? imageSrc : `/optimas${imageSrc}`;
+
   const isTeamAWinner = match.scoreA > match.scoreB;
   const isTeamBWinner = match.scoreB > match.scoreA;
 
@@ -62,7 +64,7 @@ export function ChronicleCard({ chronicle }: ChronicleCardProps) {
         <div className="relative aspect-video">
           <Link href={`/gestion/cronicas/${match.id}/ver`} className="block h-full" aria-label={`Leer más sobre ${parsedChronicle.title}`}>
             <Image
-              src={imageSrc}
+              src={finalImageSrc}
               alt={`Imagen del partido ${match.teamA.name} vs ${match.teamB.name}`}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -108,5 +110,3 @@ export function ChronicleCard({ chronicle }: ChronicleCardProps) {
     </motion.div>
   );
 }
-
-    

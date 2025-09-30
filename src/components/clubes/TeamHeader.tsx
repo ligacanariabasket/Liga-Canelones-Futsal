@@ -85,7 +85,7 @@ export const TeamHeader = ({ team }: { team: Team }) => {
     return (
         <section 
             className="relative bg-secondary/30 pt-12 pb-12 text-foreground bg-cover bg-center"
-            style={{ backgroundImage: team.bannerUrl ? `url(${team.bannerUrl})` : "none" }}
+            style={{ backgroundImage: team.bannerUrl ? `url(/optimas${team.bannerUrl.replace(/\.(jpg|jpeg|png)$/, '.webp')})` : "none" }}
         >
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/40"></div>
             <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
