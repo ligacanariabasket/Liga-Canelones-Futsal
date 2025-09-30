@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import * as React from 'react';
@@ -111,22 +110,23 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                     throw new Error("El JSON debe ser un array o un objeto con una propiedad 'matches' que sea un array.");
                 }
 
-                const newRound: Matchup[] = matchups.map(match => {
+                const newRound = matchups.reduce((acc: Matchup[], match: any) => {
                     const teamAId = match.local?.id || match.teamAId;
                     const teamBId = match.visitor?.id || match.teamBId;
 
                     if (!teamAId || !teamBId) {
                         console.warn("Skipping invalid matchup:", match);
-                        return null;
+                        return acc;
                     }
                     const scheduledDateTime = match.scheduledTime ? new Date(match.scheduledTime) : null;
-                    return {
+                    acc.push({
                         teamAId: String(teamAId),
                         teamBId: String(teamBId),
                         scheduledDate: scheduledDateTime,
                         scheduledTime: scheduledDateTime ? scheduledDateTime.toTimeString().slice(0,5) : null
-                    };
-                }).filter((m): m is Matchup => m !== null);
+                    });
+                    return acc;
+                }, []);
                 
                 updateRound(newRound);
                 toast({ title: 'Archivo Cargado', description: `Se han cargado ${newRound.length} partidos para la fecha.` });
@@ -239,7 +239,7 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                                         <Calendar 
                                             mode="single"
                                             selected={match.scheduledDate || undefined}
-                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date ?? null)}
+                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date)}
                                         />
                                     </PopoverContent>
                                 </Popover>
@@ -281,3 +281,5 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
         </Card>
     );
 }
+
+    
