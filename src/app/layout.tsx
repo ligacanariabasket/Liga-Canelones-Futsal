@@ -37,7 +37,7 @@ export default function RootLayout({
         <meta property="og:locale" content="es_UY" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#282F63" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/icon/icon-192x192.png" />
       </head>
       <body className="font-roboto antialiased" suppressHydrationWarning={true}>
         {children}
