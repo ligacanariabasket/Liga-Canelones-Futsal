@@ -1,80 +1,47 @@
-# Archivos y directorios generados y de dependencias
+# Ignora los directorios de dependencias y de compilación.
 node_modules/
 .next/
 out/
 dist/
 build/
+.firebase/
 
-# Archivos de bloqueo de paquetes
+# Ignora los archivos de bloqueo de paquetes.
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
-# Variables de entorno
-.env
-.env.local
-.env.development
-.env.production
+# Ignora los archivos de configuración sensibles y de entorno local.
+.env*
+apphosting.yaml
+components.json
+next.config.mjs
+postcss.config.js
+tailwind.config.ts
+tsconfig.json
 
-# Registros y depuración
+# Ignora los registros de depuración y errores.
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Archivos del sistema operativo
+# Ignora los archivos de sistema operativo y de IDE.
 .DS_Store
 Thumbs.db
-
-# Directorios de IDE
 .vscode/
 .idea/
 
-# Archivos de Git
+# Ignora los archivos de Git.
 .git/
 .gitignore
 
-# Respaldos de Prisma
+# Ignora los datos generados, respaldos y otros archivos de datos grandes.
 prisma/respaldo/
 prisma/json-exports/
-src/data/cronicas.txt
-src/data/estructura.json
-src/data/estructura.txt
-src/data/public.json
-src/data/estructura.json
-estructura.json
-prisma/json-exports/gameEvent.json
-prisma/json-exports/match.json
-prisma/json-exports/matchChronicle.json
-prisma/json-exports/player.json
-prisma/json-exports/playerMatchStats.json
-prisma/json-exports/poll.json
-prisma/json-exports/pollOption.json
-prisma/json-exports/post.json
-prisma/json-exports/season.json
-prisma/json-exports/seasonTeam.json
-prisma/json-exports/team.json
-prisma/json-exports/vote.json
-prisma/respaldo/gameEvent.json
-prisma/respaldo/match.json
-prisma/respaldo/matchChronicle.json
-prisma/respaldo/player.json
-prisma/respaldo/playerMatchStats.json
-prisma/respaldo/poll.json
-prisma/respaldo/pollOption.json
-prisma/respaldo/post.json
-prisma/respaldo/season.json
-prisma/respaldo/seasonTeam.json
-prisma/respaldo/team.json
-prisma/respaldo/vote.json
-src/data/cronicas.txt
-src/data/estructura.json
-src/data/estructura.txt
-src/data/public.json
+src/data/
+*.db
+*.db-journal
 
-# Activos estáticos públicos (generalmente no es necesario que la IA los vea)
+# Ignora los archivos estáticos en la carpeta public.
 public/
-
-# Archivos de configuración específicos de la IA o de documentación
-GEMINI.md
-

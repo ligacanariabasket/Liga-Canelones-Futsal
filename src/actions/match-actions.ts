@@ -3,7 +3,7 @@
 'use server';
 
 import { prisma } from '../lib/prisma';
-import type { Team, Player, GameEvent as PrismaGameEvent, PlayerMatchStats, MatchStatus, GameEventType, PlayerStat, PlayerPositionType, FullMatch as ClientFullMatch, GameState, MatchChronicle } from '@/types';
+import type { Team, Player, GameEvent as PrismaGameEvent, PlayerMatchStats, MatchStatus, GameEventType, PlayerStat, PlayerPositionType, FullMatch as ClientFullMatch, GameState, MatchChronicle, GameEvent } from '@/types';
 import { revalidatePath } from 'next/cache';
 import { Prisma, type Match, type EventType } from '@prisma/client';
 import type { GenerateMatchChronicleOutput } from '@/types/genkit-types';
@@ -114,7 +114,7 @@ export async function getMatchForChronicle(matchId: number) {
     };
 }
 
-export type MatchStats = FullMatch & {
+export type MatchStats = ClientFullMatch & {
   stats: {
     topScorers: PlayerStat[];
     assistsLeaders: PlayerStat[];

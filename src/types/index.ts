@@ -1,4 +1,5 @@
 
+
 import type { ElementType } from 'react';
 import type { Season as PrismaSeason, Match as PrismaMatch, Team as PrismaTeam, Player as PrismaPlayer, GameEvent as PrismaGameEvent, PlayerMatchStats as PrismaPlayerMatchStats, SeasonTeam as PrismaSeasonTeam, Post as PrismaPost, MatchChronicle as PrismaMatchChronicle, Poll as PrismaPoll, PollOption as PrismaPollOption, Vote as PrismaVote } from '@prisma/client';
 
