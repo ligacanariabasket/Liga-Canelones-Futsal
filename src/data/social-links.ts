@@ -26,7 +26,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: 'Sitio Web',
-    url: 'https://ligacanelonesfutsalmc.netlify.app/',
+    url: 'https://liga-canelones-futsal.netlify.app/',
     icon: GlobeIcon,
     imageUrl: '/redes/sitioweb.png',
     color: 'hsl(var(--primary))',

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://ligacanelonesfutsalmc.netlify.app';
+  const baseUrl = 'https://liga-canelones-futsal.netlify.app';
   
   return {
     rules: {

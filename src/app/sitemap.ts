@@ -5,7 +5,7 @@ import { getPosts } from '../actions/blog-actions';
 import { getAllTeams } from '../actions/team-actions';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://ligacanelonesfutsalmc.netlify.app';
+  const baseUrl = 'https://liga-canelones-futsal.netlify.app';
 
   // Páginas estáticas públicas
   const staticRoutes = [

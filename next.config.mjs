@@ -1,3 +1,5 @@
+import withPWA from 'next-pwa';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
@@ -13,7 +15,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'placehold.co',
         port: '',
-      pathname: '/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',
@@ -31,4 +33,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const pwaConfig = {
+  dest: 'public',
+  // Otras opciones de PWA que quieras añadir
+};
+
+export default withPWA(pwaConfig)(nextConfig);
