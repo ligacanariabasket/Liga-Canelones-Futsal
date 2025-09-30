@@ -34,7 +34,7 @@ export default function Hero() {
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
                 style={
                     {
-                        backgroundImage: `url('/banners/banner_azul.png')`
+                        backgroundImage: `url('/banners/banner_azul.webp')`
                     }
                 }
                 data-ai-hint="futsal court">
