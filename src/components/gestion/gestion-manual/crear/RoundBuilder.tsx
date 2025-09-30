@@ -111,7 +111,7 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                     throw new Error("El JSON debe ser un array o un objeto con una propiedad 'matches' que sea un array.");
                 }
 
-                const newRound: Matchup[] = matchups.map(match => {
+                const newRound = matchups.map(match => {
                     const teamAId = match.local?.id || match.teamAId;
                     const teamBId = match.visitor?.id || match.teamBId;
 
@@ -239,7 +239,7 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                                         <Calendar 
                                             mode="single"
                                             selected={match.scheduledDate || undefined}
-                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date || null)}
+                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date ?? null)}
                                         />
                                     </PopoverContent>
                                 </Popover>

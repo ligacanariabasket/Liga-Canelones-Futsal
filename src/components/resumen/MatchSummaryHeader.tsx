@@ -81,8 +81,8 @@ export function MatchSummaryHeader({ match }: MatchSummaryHeaderProps) {
     const { teamA, teamB, scoreA, scoreB, status, period, time, scheduledTime } = match;
 
     const isFinished = status === 'FINISHED';
-    const isTeamAWinner = isFinished && scoreA > scoreB;
-    const isTeamBWinner = isFinished && scoreB > scoreA;
+    const isTeamAWinner = isFinished && (scoreA ?? 0) > (scoreB ?? 0);
+    const isTeamBWinner = isFinished && (scoreB ?? 0) > (scoreA ?? 0);
     const isDraw = isFinished && scoreA === scoreB;
 
     const renderMatchStatus = () => {
@@ -94,7 +94,7 @@ export function MatchSummaryHeader({ match }: MatchSummaryHeaderProps) {
                             EN VIVO
                         </Badge>
                         <div className="font-mono text-xl md:text-2xl font-bold text-white">
-                            {formatTime(time)} - {getPeriodLabel(period)}
+                            {formatTime(time ?? 0)} - {getPeriodLabel(period ?? 1)}
                         </div>
                     </div>
                 );
@@ -132,8 +132,8 @@ export function MatchSummaryHeader({ match }: MatchSummaryHeaderProps) {
                  <div className="w-full flex items-center justify-around">
                      <TeamDisplay team={teamA} />
                       <motion.div className="grid grid-cols-2 gap-2" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2, delayChildren: 0.3 }}}}>
-                           <ScoreBox score={scoreA} isWinner={isTeamAWinner} isLoser={isTeamBWinner} isDraw={isDraw} />
-                           <ScoreBox score={scoreB} isWinner={isTeamBWinner} isLoser={isTeamAWinner} isDraw={isDraw} />
+                           <ScoreBox score={scoreA ?? 0} isWinner={isTeamAWinner} isLoser={isTeamBWinner} isDraw={isDraw} />
+                           <ScoreBox score={scoreB ?? 0} isWinner={isTeamBWinner} isLoser={isTeamAWinner} isDraw={isDraw} />
                        </motion.div>
                      <TeamDisplay team={teamB} />
                  </div>
@@ -147,8 +147,8 @@ export function MatchSummaryHeader({ match }: MatchSummaryHeaderProps) {
                         {renderMatchStatus()}
                     </div>
                     <motion.div className="grid grid-cols-2 gap-1 md:gap-2 w-full max-w-[200px]" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2, delayChildren: 0.3 }}}}>
-                       <ScoreBox score={scoreA} isWinner={isTeamAWinner} isLoser={isTeamBWinner} isDraw={isDraw} />
-                       <ScoreBox score={scoreB} isWinner={isTeamBWinner} isLoser={isTeamAWinner} isDraw={isDraw} />
+                       <ScoreBox score={scoreA ?? 0} isWinner={isTeamAWinner} isLoser={isTeamBWinner} isDraw={isDraw} />
+                       <ScoreBox score={scoreB ?? 0} isWinner={isTeamBWinner} isLoser={isTeamAWinner} isDraw={isDraw} />
                     </motion.div>
                 </div>
 

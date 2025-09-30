@@ -61,7 +61,7 @@ export function DraggablePlayer({ player, x, y, color, onMove, isSubstitute = fa
         <Popover open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <PopoverTrigger asChild>
                  <div
-                    ref={drag as React.Ref<HTMLDivElement>}
+                    ref={drag as unknown as React.Ref<HTMLDivElement>}
                     onClick={handleClick}
                     className={cn(
                         'relative flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border-2 border-white/50 font-bold text-white shadow-lg transition-transform',
