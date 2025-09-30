@@ -128,20 +128,17 @@ function ConfirmationContent() {
         return <p className="text-center text-destructive">No se pudo cargar el estado del partido desde el almacenamiento local.</p>;
     }
     
-    // Create a mock object for the components that require a specific shape
-    const graphData = {
-        ...gameState,
-        scoreA: gameState.scoreA,
-        scoreB: gameState.scoreB,
-        teamA: {
-            id: gameState.teamA.id,
-            name: gameState.teamA.name,
-        },
-        teamB: {
-            id: gameState.teamB.id,
-            name: gameState.teamB.name,
-        },
-    }
+    const mockMatchStats = {
+      ...gameState,
+      scoreA: gameState.scoreA ?? 0,
+      scoreB: gameState.scoreB ?? 0,
+    } as unknown as {
+        scoreA: number;
+        scoreB: number;
+        events: GameEvent[];
+        teamA: { id: number; name: string; };
+        teamB: { id: number; name: string; };
+    };
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">
@@ -200,10 +197,10 @@ function ConfirmationContent() {
                         </CardContent>
                     </TabsContent>
                     <TabsContent value="players">
-                       <MatchPlayers match={gameState as FullMatch} />
+                       <MatchPlayers match={gameState as unknown as FullMatch} />
                     </TabsContent>
                     <TabsContent value="summary">
-                       <GraphicalSummary match={graphData} />
+                       <GraphicalSummary match={mockMatchStats} />
                     </TabsContent>
                 </Tabs>
             </Card>

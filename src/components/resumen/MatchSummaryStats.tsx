@@ -119,7 +119,7 @@ export function MatchSummaryStats({ match }: MatchSummaryStatsProps) {
     };
     
     const statsData = [
-        { label: 'Goles', valueA: match.scoreA, valueB: match.scoreB },
+        { label: 'Goles', valueA: match.scoreA ?? 0, valueB: match.scoreB ?? 0 },
         { label: 'Asistencias', valueA: getStatCount(teamA.id, 'ASSIST'), valueB: getStatCount(teamB.id, 'ASSIST') },
         { label: 'Tiros al Arco', valueA: getStatCount(teamA.id, 'SHOT'), valueB: getStatCount(teamB.id, 'SHOT') },
         { label: 'Faltas', valueA: getStatCount(teamA.id, 'FOUL'), valueB: getStatCount(teamB.id, 'FOUL') },

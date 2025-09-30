@@ -2,7 +2,7 @@
 
 'use client';
 
-import type { FullMatch, GameEvent, GameEventType, Player } from '@/types';
+import type { FullMatch, GameEvent, GameEventType, Player, Team } from '@/types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useGame } from '@/contexts/GameProvider';

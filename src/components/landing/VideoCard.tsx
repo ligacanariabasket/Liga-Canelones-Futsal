@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Link from 'next/link';
@@ -6,7 +7,7 @@ import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-interface VideoCardProps {
+export interface VideoCardProps {
   video: {
     id: number;
     title: string;

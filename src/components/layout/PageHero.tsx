@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React from 'react';
@@ -9,7 +10,7 @@ type PageHeroProps = {
   title: string;
   description?: string;
   children?: React.ReactNode;
-  icon?: boolean; 
+  icon?: React.ReactNode; 
 };
 
 const containerVariants: Variants = {
@@ -28,7 +29,7 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15 } },
 };
 
-export function PageHero({ title, description, children }: PageHeroProps) {
+export function PageHero({ title, description, children, icon }: PageHeroProps) {
   return (
     <motion.section 
       className="relative bg-secondary/30 py-16 md:py-24 text-foreground overflow-hidden"
@@ -42,7 +43,7 @@ export function PageHero({ title, description, children }: PageHeroProps) {
       <div className="relative container mx-auto px-4 text-center">
         <motion.div variants={itemVariants} className="flex justify-center mb-4">
             <div className="p-4 bg-primary/10 border-2 border-primary/20 rounded-full">
-                <Newspaper className="h-12 w-12 text-primary" />
+                {icon || <Newspaper className="h-12 w-12 text-primary" />}
             </div>
         </motion.div>
         <motion.h1 

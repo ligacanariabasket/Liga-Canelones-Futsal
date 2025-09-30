@@ -60,7 +60,7 @@ const NavAccordion = ({ title, links, icon: Icon, linkIcons, onLinkClick }: { ti
             <AccordionContent className="pl-6">
                 <div className="flex flex-col gap-1">
                     {links.map((item) => {
-                      const LinkIcon = linkIcons[item.title];
+                      const LinkIcon = linkIcons[item.title as keyof typeof linkIcons];
                       return <NavLink key={item.href} {...item} icon={LinkIcon} onClick={onLinkClick} />
                     })}
                 </div>
@@ -109,7 +109,7 @@ export function MobileNav() {
                  <Accordion type="multiple" className="w-full">
                     <div className="flex flex-col gap-1">
                         {siteConfig.mainNav.map((item) => {
-                          const Icon = siteIcons.mainNav[item.title];
+                          const Icon = siteIcons.mainNav[item.title as keyof typeof siteIcons.mainNav];
                           return <NavLink key={item.href} {...item} icon={Icon} onClick={() => setOpen(false)} />
                         })}
                     </div>

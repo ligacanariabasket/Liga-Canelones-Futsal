@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { SeasonTeamWithTeam } from '@/types';
@@ -118,7 +119,7 @@ export function StandingsTable({ standings }: StandingsTableProps) {
                     <TableCell className="text-center text-muted-foreground tabular-nums hidden lg:table-cell">{entry.goalDifference}</TableCell>
                     <TableCell className="hidden lg:table-cell">
                         <div className="flex items-center justify-center gap-1">
-                            {(entry.recentResults || []).slice(0, 5).map((result: 'W' | 'D' | 'L', i: number) => (
+                            {((entry as any).recentResults || []).slice(0, 5).map((result: 'W' | 'D' | 'L', i: number) => (
                                 <MatchResultIndicator key={i} result={result} />
                             ))}
                         </div>

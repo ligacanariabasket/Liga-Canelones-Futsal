@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import type { FullMatch } from '@/types';
@@ -57,16 +58,16 @@ export function LiveMatchCard({ match }: LiveMatchCardProps) {
       <Link href={`/partidos/${match.id}`} className="block group h-full">
         <Card className="overflow-hidden shadow-lg h-full flex flex-col bg-card border-border hover:border-primary/50">
             <CardContent className="p-4 flex-grow flex flex-col justify-center">
-               <TeamRow team={match.teamA} score={match.scoreA} />
+               <TeamRow team={match.teamA} score={match.scoreA ?? 0} />
                <div className="border-b my-1 border-border/50"></div>
-               <TeamRow team={match.teamB} score={match.scoreB} />
+               <TeamRow team={match.teamB} score={match.scoreB ?? 0} />
             </CardContent>
             <CardFooter className="p-0">
                 <div className="w-full bg-slate-800 text-white flex justify-between items-center px-4 py-2">
                     <span className="font-semibold text-sm">{formatDate(match.scheduledTime)}</span>
                     <div className="flex items-center gap-2">
                         <span className="font-semibold text-sm">{getPeriodLabel()}</span>
-                        <span className="font-orbitron text-lg font-bold text-primary animate-pulse">{formatTime(match.time)}</span>
+                        <span className="font-orbitron text-lg font-bold text-primary animate-pulse">{formatTime(match.time ?? 1200)}</span>
                     </div>
                 </div>
             </CardFooter>

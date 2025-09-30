@@ -70,8 +70,8 @@ export function ChronicleHero({ match, title }: ChronicleHeroProps) {
   const { teamA, teamB, scoreA, scoreB, status } = match;
 
   const isFinished = status === 'FINISHED';
-  const isTeamAWinner = isFinished && scoreA > scoreB;
-  const isTeamBWinner = isFinished && scoreB > scoreA;
+  const isTeamAWinner = isFinished && (scoreA ?? 0) > (scoreB ?? 0);
+  const isTeamBWinner = isFinished && (scoreB ?? 0) > (scoreA ?? 0);
   const isDraw = isFinished && scoreA === scoreB;
 
   const renderStatus = () => {
@@ -114,8 +114,8 @@ export function ChronicleHero({ match, title }: ChronicleHeroProps) {
                 <div className="flex flex-col items-center justify-center gap-2 md:gap-4 text-center">
                     {renderStatus()}
                      <motion.div className="grid grid-cols-2 gap-1 md:gap-2 w-full max-w-[200px]" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2, delayChildren: 0.3 }}}}>
-                       <ScoreBox score={scoreA} isWinner={isTeamAWinner} isLoser={isTeamBWinner} isDraw={isDraw} />
-                       <ScoreBox score={scoreB} isWinner={isTeamBWinner} isLoser={isTeamAWinner} isDraw={isDraw} />
+                       <ScoreBox score={scoreA ?? 0} isWinner={isTeamAWinner} isLoser={isTeamBWinner} isDraw={isDraw} />
+                       <ScoreBox score={scoreB ?? 0} isWinner={isTeamBWinner} isLoser={isTeamAWinner} isDraw={isDraw} />
                     </motion.div>
                 </div>
 

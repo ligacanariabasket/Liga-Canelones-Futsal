@@ -1,10 +1,10 @@
 
+
 'use client';
 
 import { motion } from 'framer-motion';
 import { animationVariants } from '@/lib/animations';
-import type { VideoCardProps } from '@/components/landing/VideoCard';
-import { VideoCard } from '@/components/landing/VideoCard';
+import { VideoCard, type VideoCardProps } from '@/components/landing/VideoCard';
 
 interface VideoGridProps {
   videos: VideoCardProps['video'][];

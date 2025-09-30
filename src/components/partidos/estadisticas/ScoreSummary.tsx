@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Image from 'next/image';
@@ -54,7 +55,7 @@ export function ScoreSummary({ match }: ScoreSummaryProps) {
                     <Badge variant="destructive" className="animate-pulse text-sm mb-2">
                         EN VIVO
                     </Badge>
-                    <p className="text-xs md:text-sm font-semibold tracking-widest">{formatTime(time)} - {getPeriodLabel(period)}</p>
+                    <p className="text-xs md:text-sm font-semibold tracking-widest">{formatTime(time ?? 0)} - {getPeriodLabel(period ?? 1)}</p>
                 </div>
             );
         case 'FINISHED':
@@ -75,8 +76,8 @@ export function ScoreSummary({ match }: ScoreSummaryProps) {
             <div className="flex flex-col items-center justify-center gap-2 md:gap-4 text-center">
                 {renderStatus()}
                 <div className="grid grid-cols-2 gap-1 md:gap-2 w-full max-w-[200px]">
-                    <ScoreBox score={scoreA} />
-                    <ScoreBox score={scoreB} />
+                    <ScoreBox score={scoreA ?? 0} />
+                    <ScoreBox score={scoreB ?? 0} />
                 </div>
             </div>
 

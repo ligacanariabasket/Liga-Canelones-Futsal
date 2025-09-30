@@ -72,8 +72,8 @@ export function ActionMenu({ player, onAction }: ActionMenuProps) {
         timestamp: state.time,
         playerInId: null,
         playerInName: null,
-        x: coords?.x,
-        y: coords?.y,
+        x: coords?.x ?? null,
+        y: coords?.y ?? null,
     };
     dispatch({ type: 'ADD_EVENT', payload: { event: newEvent } });
     handleCreateGameEvent(newEvent);

@@ -8,7 +8,7 @@ import { Header } from '@/components/layout/header';
 import { StandingsTable } from '@/components/posiciones/StandingsTable';
 import { PlayerRanking } from '@/components/jugadores/PlayerRanking';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import type { FullMatch, PlayerWithStats, SeasonTeam, Team } from '@/types';
+import type { FullMatch, PlayerWithStats, SeasonTeamWithTeam } from '@/types';
 import { useEffect, useState } from 'react';
 import { ScheduleCalendar } from '@/components/posiciones/ScheduleCalendar';
 import { getAllMatches } from '@/actions/match-actions';
@@ -19,7 +19,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 const TabSkeleton = () => <Skeleton className="w-full h-96 bg-muted rounded-lg" />;
 
 export default function PosicionesPage() {
-  const [standings, setStandings] = useState<(SeasonTeam & { team: Team })[] | null>(null);
+  const [standings, setStandings] = useState<SeasonTeamWithTeam[] | null>(null);
   const [players, setPlayers] = useState<PlayerWithStats[] | null>(null);
   const [matches, setMatches] = useState<FullMatch[] | null>(null);
   const [activeTab, setActiveTab] = useState('calendario');
@@ -29,7 +29,7 @@ export default function PosicionesPage() {
       if (activeTab === 'clasificacion' && !standings) {
         setStandings(null); // Show skeleton
         const standingsData = await getStandingsFromMatches(1); 
-        setStandings(standingsData);
+        setStandings(standingsData as SeasonTeamWithTeam[]);
       } else if (activeTab === 'ranking' && !players) {
         setPlayers(null); // Show skeleton
         const aggregatedStats = await getAggregatedPlayerStats();

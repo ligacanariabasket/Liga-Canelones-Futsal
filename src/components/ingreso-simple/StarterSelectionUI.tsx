@@ -1,9 +1,10 @@
 
+
 'use client';
 
 import { useGame } from '@/contexts/GameProvider';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import type { Player, SelectedPlayer } from '@/types';
+import type { Player } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Users, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -43,7 +44,7 @@ interface TeamColumnProps {
     teamId: 'A' | 'B';
     team: { id: number; name: string; players: Player[] } | null;
     activePlayers: number[];
-    onPlayerToggle: (payload: SelectedPlayer) => void;
+    onPlayerToggle: (payload: { teamId: 'A' | 'B'; playerId: number; }) => void;
 }
 
 function TeamColumn({ team, teamId, activePlayers, onPlayerToggle }: TeamColumnProps) {
@@ -77,7 +78,7 @@ export function StarterSelectionUI() {
     const { toast } = useToast();
     const { teamA, teamB, activePlayersA, activePlayersB } = state;
 
-    const handlePlayerToggle = (payload: SelectedPlayer) => {
+    const handlePlayerToggle = (payload: { teamId: 'A' | 'B'; playerId: number; }) => {
         dispatch({ type: 'TOGGLE_ACTIVE_PLAYER', payload });
     };
 

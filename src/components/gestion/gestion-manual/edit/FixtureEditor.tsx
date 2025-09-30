@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -43,8 +44,8 @@ export function FixtureEditor({ season, allTeams, allMatches }: FixtureEditorPro
         const numRounds = isEven ? numTeams - 1 : numTeams;
         const matchesPerRound = isEven ? numTeams / 2 : (numTeams - 1) / 2;
         
-        const initialMatchups = Array.from({ length: matchesPerRound }, () => ({ teamAId: null, teamBId: null, scheduledDate: null, scheduledTime: null }));
-        const newRounds = Array.from({ length: numRounds > 0 ? numRounds : 1 }, () => [...initialMatchups]);
+        const initialMatchups: Matchup[] = Array.from({ length: matchesPerRound }, () => ({ teamAId: null, teamBId: null, scheduledDate: null, scheduledTime: null }));
+        const newRounds: Matchup[][] = Array.from({ length: numRounds > 0 ? numRounds : 1 }, () => [...initialMatchups]);
         
         matchesForSeason.forEach(match => {
             if (match.round && match.round <= newRounds.length) {
@@ -52,8 +53,8 @@ export function FixtureEditor({ season, allTeams, allMatches }: FixtureEditorPro
                 
                 const scheduledTime = new Date(match.scheduledTime);
                 const matchData: Matchup = {
-                    teamAId: String(match.teamAId),
-                    teamBId: String(match.teamBId),
+                    teamAId: String(match.teamA.id),
+                    teamBId: String(match.teamB.id),
                     scheduledDate: scheduledTime,
                     scheduledTime: scheduledTime.toTimeString().slice(0,5),
                 };

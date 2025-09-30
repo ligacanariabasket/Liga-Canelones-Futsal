@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import * as React from 'react';
@@ -238,7 +239,7 @@ export function RoundBuilder({ teams, roundData, roundIndex, onRoundChange, onSa
                                         <Calendar 
                                             mode="single"
                                             selected={match.scheduledDate || undefined}
-                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date)}
+                                            onSelect={(date) => updateMatchupField(matchIndex, 'scheduledDate', date || null)}
                                         />
                                     </PopoverContent>
                                 </Popover>

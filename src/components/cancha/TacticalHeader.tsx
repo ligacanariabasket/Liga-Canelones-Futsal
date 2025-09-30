@@ -46,8 +46,10 @@ export function TacticalHeader({ match }: { match: FullMatch }) {
     const { state, dispatch } = useGame();
     // Usamos los datos del estado del juego, pero si no existen, usamos los del 'match' inicial.
     const { teamA, teamB, scoreA, scoreB, time, period, status, timeoutsA, timeoutsB, foulsA, foulsB } = state.teamA ? state : match;
-    const [newMinutes, setNewMinutes] = useState(Math.floor(time / 60));
-    const [newSeconds, setNewSeconds] = useState(time % 60);
+    
+    const safeTime = time ?? 0;
+    const [newMinutes, setNewMinutes] = useState(Math.floor(safeTime / 60));
+    const [newSeconds, setNewSeconds] = useState(safeTime % 60);
 
     const handleTimeChange = () => {
         const totalSeconds = (newMinutes * 60) + newSeconds;
@@ -78,8 +80,8 @@ export function TacticalHeader({ match }: { match: FullMatch }) {
                         <div className="text-4xl md:text-6xl font-orbitron font-black">{scoreA}</div>
                     </div>
                      <div className="flex items-center justify-around pt-1 border-t border-white/10">
-                        <StatDisplay label="Faltas" value={foulsA} icon={<ShieldOff />} hasPenalty={foulsA >= 6} />
-                        <StatDisplay label="T.M." value={timeoutsA} icon={<Timer className="text-green-400" />} />
+                        <StatDisplay label="Faltas" value={foulsA ?? 0} icon={<ShieldOff />} hasPenalty={(foulsA ?? 0) >= 6} />
+                        <StatDisplay label="T.M." value={timeoutsA ?? 0} icon={<Timer className="text-green-400" />} />
                     </div>
                 </div>
                 
@@ -87,7 +89,7 @@ export function TacticalHeader({ match }: { match: FullMatch }) {
                 <div className="flex-shrink-0 flex flex-col items-center justify-center bg-transparent text-xl md:text-3xl font-black px-2 md:px-4 py-2">
                     <Dialog>
                         <DialogTrigger asChild>
-                             <span className="text-3xl md:text-4xl font-bold font-orbitron cursor-pointer hover:text-primary/80 transition-colors">{formatTime(time)}</span>
+                             <span className="text-3xl md:text-4xl font-bold font-orbitron cursor-pointer hover:text-primary/80 transition-colors">{formatTime(safeTime)}</span>
                         </DialogTrigger>
                          <DialogContent className="sm:max-w-[425px]">
                             <DialogHeader>
@@ -123,7 +125,7 @@ export function TacticalHeader({ match }: { match: FullMatch }) {
                         </DialogContent>
                     </Dialog>
                     <div className="my-1 border-b-2 border-white/20 w-full"></div>
-                    <span className="text-xs md:text-sm font-semibold uppercase tracking-widest">{getPeriodLabel(status, period)}</span>
+                    <span className="text-xs md:text-sm font-semibold uppercase tracking-widest">{getPeriodLabel(status, period ?? 1)}</span>
                 </div>
 
                 {/* Equipo B (Visitante) */}
@@ -134,8 +136,8 @@ export function TacticalHeader({ match }: { match: FullMatch }) {
                         <Image src={teamB.logoUrl || ''} alt={`${teamB.name} logo`} width={56} height={56} className="w-10 h-10 md:w-14 md:h-14 object-contain flex-shrink-0" />
                     </div>
                      <div className="flex items-center justify-around pt-1 border-t border-white/10">
-                        <StatDisplay label="T.M." value={timeoutsB} icon={<Timer className="text-green-400" />} />
-                        <StatDisplay label="Faltas" value={foulsB} icon={<ShieldOff />} hasPenalty={foulsB >= 6} />
+                        <StatDisplay label="T.M." value={timeoutsB ?? 0} icon={<Timer className="text-green-400" />} />
+                        <StatDisplay label="Faltas" value={foulsB ?? 0} icon={<ShieldOff />} hasPenalty={(foulsB ?? 0) >= 6} />
                     </div>
                 </div>
             </div>

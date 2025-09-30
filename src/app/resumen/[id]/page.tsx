@@ -1,4 +1,5 @@
 
+
 import { notFound } from 'next/navigation';
 import { getMatchStats } from '@/actions/match-actions';
 import { Header } from '@/components/layout/header';
@@ -82,7 +83,11 @@ export default async function ResumenPage(props: ResumenPageProps) {
                             <MatchPlayers match={match as MatchStats} />
                         </TabsContent>
                          <TabsContent value="summary">
-                            <GraphicalSummary match={match as MatchStats} />
+                            <GraphicalSummary match={{
+                              ...match,
+                              scoreA: match.scoreA ?? 0,
+                              scoreB: match.scoreB ?? 0,
+                            }} />
                         </TabsContent>
                     </Tabs>
                 </div>

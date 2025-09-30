@@ -37,12 +37,12 @@ const TeamDisplay = ({ team }: { team: FullMatch['teamA'] }) => (
 export function ChronicleCard({ chronicle }: ChronicleCardProps) {
   const { match, chronicle: chronicleData, createdAt } = chronicle;
   
-  let parsedChronicle: GenerateMatchChronicleOutput;
+  let parsedChronicle: GenerateMatchChronicleOutput | { title: string, chronicleBody: string, matchStatsSummary: string };
   if (typeof chronicleData === 'string') {
     try {
       parsedChronicle = JSON.parse(chronicleData);
     } catch {
-      parsedChronicle = { title: 'Crónica no disponible', excerpt: '', matchStatsSummary: '', chronicleBody: '' };
+      parsedChronicle = { title: 'Crónica no disponible', chronicleBody: '', matchStatsSummary: '' };
     }
   } else {
     parsedChronicle = chronicleData as GenerateMatchChronicleOutput;
@@ -51,8 +51,8 @@ export function ChronicleCard({ chronicle }: ChronicleCardProps) {
   const imageSrc = (match.teamA.bannerUrl || match.teamB.bannerUrl || '/banner_youtube.jpg').replace(/\.(jpg|jpeg|png)$/, '.webp');
   const finalImageSrc = imageSrc.startsWith('/optimas') ? imageSrc : `/optimas${imageSrc}`;
 
-  const isTeamAWinner = match.scoreA > match.scoreB;
-  const isTeamBWinner = match.scoreB > match.scoreA;
+  const isTeamAWinner = (match.scoreA ?? 0) > (match.scoreB ?? 0);
+  const isTeamBWinner = (match.scoreB ?? 0) > (match.scoreA ?? 0);
 
   return (
     <motion.div
@@ -97,7 +97,7 @@ export function ChronicleCard({ chronicle }: ChronicleCardProps) {
            </CardHeader>
            <CardContent className="p-0 flex-grow">
              <CardDescription className="text-base text-muted-foreground line-clamp-3">
-                 {parsedChronicle.excerpt}
+                 {(parsedChronicle as any).excerpt}
              </CardDescription>
            </CardContent>
            <CardFooter className="p-0 pt-4 mt-auto">

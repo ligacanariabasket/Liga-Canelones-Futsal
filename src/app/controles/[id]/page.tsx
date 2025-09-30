@@ -79,36 +79,35 @@ export default function MatchControlPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (id) {
-      const loadMatch = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-          const matchId = parseInt(id, 10);
-          if (isNaN(matchId)) {
-            setError('ID de partido inválido.');
-            return;
-          }
-          const fetchedMatch = await getMatchById(matchId);
-          if (fetchedMatch) {
-            setMatch(fetchedMatch as unknown as FullMatch);
-          } else {
-            setError('Partido no encontrado.');
-          }
-        } catch (err) {
-          const errorMessage = err instanceof Error ? err.message : 'No se pudo cargar el partido.';
-          setError(errorMessage);
-          toast({
-            variant: 'destructive',
-            title: 'Error de Carga',
-            description: errorMessage,
-          });
-        } finally {
-          setLoading(false);
+    const loadMatch = async () => {
+      if (!id) return;
+      setLoading(true);
+      setError(null);
+      try {
+        const matchId = parseInt(id, 10);
+        if (isNaN(matchId)) {
+          setError('ID de partido inválido.');
+          return;
         }
+        const fetchedMatch = await getMatchById(matchId);
+        if (fetchedMatch) {
+          setMatch(fetchedMatch as unknown as FullMatch);
+        } else {
+          setError('Partido no encontrado.');
+        }
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'No se pudo cargar el partido.';
+        setError(errorMessage);
+        toast({
+          variant: 'destructive',
+          title: 'Error de Carga',
+          description: errorMessage,
+        });
+      } finally {
+        setLoading(false);
       }
-      loadMatch();
-    }
+    };
+    loadMatch();
   }, [id, toast]);
   
   if (loading) {

@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import * as React from 'react';
@@ -104,7 +105,7 @@ export function Header() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                     {siteConfig.infoNav.links.map((link) => {
-                      const Icon = siteIcons.infoNavLinks[link.title];
+                      const Icon = siteIcons.infoNavLinks[link.title as keyof typeof siteIcons.infoNavLinks];
                       return (
                         <DropdownMenuItem key={link.href} asChild>
                           <Link href={link.href}>
@@ -137,7 +138,7 @@ export function Header() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
                      {siteConfig.gestionNav.links.map((link) => {
-                      const Icon = siteIcons.gestionNavLinks[link.title];
+                      const Icon = siteIcons.gestionNavLinks[link.title as keyof typeof siteIcons.gestionNavLinks];
                       return (
                         <DropdownMenuItem key={link.href} asChild>
                           <Link href={link.href}>
@@ -161,7 +162,7 @@ export function Header() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     {siteConfig.adminNav.links.map((link) => {
-                       const Icon = siteIcons.adminNavLinks[link.title];
+                       const Icon = siteIcons.adminNavLinks[link.title as keyof typeof siteIcons.adminNavLinks];
                        return (
                         <DropdownMenuItem key={link.href} asChild>
                           <Link href={link.href}>
@@ -180,4 +181,3 @@ export function Header() {
     </motion.header>
   );
 }
-

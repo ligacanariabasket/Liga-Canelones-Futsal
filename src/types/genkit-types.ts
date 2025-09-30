@@ -1,3 +1,4 @@
+
 import { z } from 'zod';
 
 // --- Shared Schemas and Types for Genkit Actions ---
@@ -51,6 +52,7 @@ export type GenerateMatchChronicleInput = z.infer<typeof GenerateMatchChronicleI
 
 export const GenerateMatchChronicleOutputSchema = z.object({
     title: z.string().describe("Un titular simple y directo. Ej: 'Equipo A vence a Equipo B'"),
+    excerpt: z.string().describe("Un resumen corto y atractivo de la crónica para usar en vistas previas."),
     chronicleBody: z.string().describe("El cuerpo principal de la crónica, narrando el partido de forma periodística."),
     matchStatsSummary: z.string().describe("Un bloque de texto en formato Markdown que incluye una lista de 2 a 4 puntos con datos estadísticos, seguido por el banner y logo de la liga.")
 });

@@ -15,7 +15,10 @@ export type PlayerMatchStats = PrismaPlayerMatchStats;
 
 export type Season = PrismaSeason;
 
-export type SeasonTeam = PrismaSeasonTeam;
+export interface SeasonTeam extends Omit<PrismaSeasonTeam, 'team'> {
+  // Define any additional properties if needed
+}
+
 
 export interface Team extends Omit<PrismaTeam, 'slug'> {
   slug: string;
@@ -30,7 +33,8 @@ export interface Team extends Omit<PrismaTeam, 'slug'> {
 }
 
 export type SeasonTeamWithTeam = SeasonTeam & {
-    team: Team
+    team: Team;
+    recentResults: ('W' | 'D' | 'L')[];
 }
 
 export type GameEventType = 'GOAL' | 'ASSIST' | 'FOUL' | 'SHOT' | 'YELLOW_CARD' | 'RED_CARD' | 'TIMEOUT' | 'SUBSTITUTION' | 'MATCH_START' | 'PERIOD_START' | 'MATCH_END';

@@ -69,7 +69,7 @@ export function StandingsWidget({ standings, loading }: StandingsWidgetProps) {
         </div>
         {loading ? <StandingsSkeleton /> : topTeams.map((teamData, index) => (
           <TeamRow 
-            key={teamData.team.id}
+            key={teamData.teamId}
             team={teamData.team}
             position={index + 1}
             pts={teamData.points}

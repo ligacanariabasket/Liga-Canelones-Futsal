@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Link from 'next/link';
@@ -54,7 +55,7 @@ export function FinishedMatchCard({ match }: FinishedMatchCardProps) {
     year: 'numeric'
   });
 
-  const hasChronicle = match._count.matchChronicles > 0;
+  const hasChronicle = match._count.chronicles > 0;
   const scoreA = match.scoreA ?? 0;
   const scoreB = match.scoreB ?? 0;
   const isDraw = scoreA === scoreB;

@@ -49,8 +49,8 @@ function MatchCard({ match }: { match: FullMatch }) {
     const statusInfo = getStatusInfo();
     
     const isFinished = match.status === 'FINISHED';
-    const isTeamAWinner = isFinished && match.scoreA > match.scoreB;
-    const isTeamBWinner = isFinished && match.scoreB > match.scoreA;
+    const isTeamAWinner = isFinished && (match.scoreA ?? 0) > (match.scoreB ?? 0);
+    const isTeamBWinner = isFinished && (match.scoreB ?? 0) > (match.scoreA ?? 0);
 
     return (
         <motion.div

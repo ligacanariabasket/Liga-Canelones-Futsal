@@ -47,7 +47,7 @@ export function JerseyButton({ jerseyNumber, playerName, isSelected, onClick, is
         )}
         onClick={!isDisabled ? onClick : undefined}
         aria-label={`Seleccionar jugador ${playerName}, número ${jerseyNumber}`}
-        aria-pressed={isSelected}
+        aria-pressed={isSelected ?? false}
     >
         <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
             <TshirtIcon className={cn(
