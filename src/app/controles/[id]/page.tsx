@@ -80,7 +80,7 @@ export default function MatchControlPage() {
 
   useEffect(() => {
     if (id) {
-      async function loadMatch() {
+      const loadMatch = async () => {
         setLoading(true);
         setError(null);
         try {
