@@ -190,89 +190,76 @@ export const getPlayerById = cache(async (id: number): Promise<(Player & { team:
  * @returns {Promise<PlayerWithStats[]>} A promise that resolves to an array of players with their aggregated stats.
  */
 export const getAggregatedPlayerStats = cache(async (): Promise<PlayerWithStats[]> => {
-    const allMatches = await getAllMatches();
-    const finishedMatches = allMatches.filter(m => m.status === 'FINISHED');
     const allPlayersWithTeam = await getAllPlayers();
 
-    const playerStatsMap: { [playerId: number]: { player: PlayerWithStats, goals: number, assists: number, matchesPlayed: number, minutesPlayed: number } } = {};
+    const statsMap: { [playerId: number]: { goals: number; assists: number; matchesPlayed: Set<number> } } = {};
 
-    // Initialize all players
     allPlayersWithTeam.forEach(p => {
-        playerStatsMap[p.id] = {
-            player: { ...p, goals: 0, assists: 0, matchesPlayed: 0, minutesPlayed: 0, avgMinutesPerMatch: 0 },
+        statsMap[p.id] = {
             goals: 0,
             assists: 0,
-            matchesPlayed: 0,
-            minutesPlayed: 0
+            matchesPlayed: new Set(),
         };
     });
 
-
-    for (const match of finishedMatches) {
-        const stats = await getMatchStats(match.id);
-        if (!stats) continue;
-
-        const processStats = (statArray: PlayerStat[], type: 'goals' | 'assists') => {
-            statArray.forEach(stat => {
-                if (!playerStatsMap[stat.player.id]) return;
-
-                if (type === 'goals') {
-                    playerStatsMap[stat.player.id].goals += stat.count;
-                } else {
-                    playerStatsMap[stat.player.id].assists += stat.count;
-                }
-            });
-        };
-
-        const getPlayerStatFromEvents = (eventType: 'GOAL' | 'ASSIST') => {
-            return Object.values(match.events.filter(e => e.type === eventType).reduce((acc, event) => {
-                if (event.playerId) {
-                    if (!acc[event.playerId]) {
-                        const player = allPlayersWithTeam.find(p => p.id === event.playerId);
-                        if (player) {
-                            acc[event.playerId] = { player, count: 0 };
-                        }
-                    }
-                    if (acc[event.playerId]) {
-                        acc[event.playerId].count++;
-                    }
-                }
-                return acc;
-            }, {} as { [key: number]: PlayerStat }));
+    const gameEvents = await prisma.gameEvent.findMany({
+        where: {
+            match: {
+                status: 'FINISHED'
+            },
+            type: {
+                in: ['GOAL', 'ASSIST']
+            },
+            playerId: {
+                not: null
+            }
+        },
+        select: {
+            playerId: true,
+            type: true,
+            matchId: true
         }
+    });
 
-        processStats(getPlayerStatFromEvents('GOAL'), 'goals');
-        processStats(getPlayerStatFromEvents('ASSIST'), 'assists');
-        
-        const playersInMatch = new Set<number>();
-        stats.teamA.players.forEach(p => playersInMatch.add(p.id));
-        stats.teamB.players.forEach(p => playersInMatch.add(p.id));
-
-        playersInMatch.forEach(playerId => {
-             if (playerStatsMap[playerId]) {
-                playerStatsMap[playerId].matchesPlayed += 1;
+    for (const event of gameEvents) {
+        if (event.playerId && statsMap[event.playerId]) {
+            if (event.type === 'GOAL') {
+                statsMap[event.playerId].goals++;
+            } else if (event.type === 'ASSIST') {
+                statsMap[event.playerId].assists++;
             }
-        });
-        
-        match.playerMatchStats.forEach(stat => {
-            if (playerStatsMap[stat.playerId]) {
-                playerStatsMap[stat.playerId].minutesPlayed += stat.timePlayedInSeconds;
-            }
-        });
+        }
     }
+    
+    const playerMatchStats = await prisma.playerMatchStats.findMany({
+        where: {
+            match: {
+                status: 'FINISHED'
+            }
+        },
+        select: {
+            playerId: true,
+            matchId: true
+        }
+    });
 
-    return Object.values(playerStatsMap).map(p => {
-        const matchesPlayed = p.matchesPlayed || 0;
-        const minutesPlayed = Math.floor(p.minutesPlayed / 60);
-        const avgMinutesPerMatch = matchesPlayed > 0 ? parseFloat((minutesPlayed / matchesPlayed).toFixed(1)) : 0;
+    playerMatchStats.forEach(stat => {
+        if(statsMap[stat.playerId]) {
+            statsMap[stat.playerId].matchesPlayed.add(stat.matchId);
+        }
+    });
+
+    return allPlayersWithTeam.map(player => {
+        const stats = statsMap[player.id];
+        const matchesPlayed = stats.matchesPlayed.size;
         
         return {
-            ...p.player,
-            goals: p.goals,
-            assists: p.assists,
-            matchesPlayed,
-            minutesPlayed,
-            avgMinutesPerMatch,
+            ...player,
+            goals: stats.goals,
+            assists: stats.assists,
+            matchesPlayed: matchesPlayed,
+            minutesPlayed: 0, // Temporarily disabled for performance
+            avgMinutesPerMatch: 0, // Temporarily disabled for performance
         };
     });
 });
